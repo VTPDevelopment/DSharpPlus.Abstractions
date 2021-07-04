@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
-using DSharpPlus.Abstractions.Entities.Interfaces;
 using DSharpPlus.Abstractions.Entities;
+using DSharpPlus.Abstractions.Entities.Interfaces;
 
 namespace DSharpPlus.Abstractions.Entities.Clients
 {

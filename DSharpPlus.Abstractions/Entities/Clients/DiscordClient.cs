@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DSharpPlus.Abstractions.Entities.Clients;
+using DSharpPlus;
+using DSharpPlus.Entities;
 using DSharpPlus.Abstractions.Entities.Interfaces;
-using DSharpPlus.Abstractions.Entities;
 
 namespace DSharpPlus.Abstractions.Entities.Clients
 {
@@ -22,7 +22,8 @@ namespace DSharpPlus.Abstractions.Entities.Clients
 
 		
 		public IReadOnlyDictionary<ulong, IGuild> Guilds { get; }
-
+		internal IReadOnlyDictionary<ulong, DiscordGuild> _discordGuilds;
+			
 		public async Task<IUser?> GetUserAsync(ulong userId)
 		{
 			return null;
@@ -30,6 +31,23 @@ namespace DSharpPlus.Abstractions.Entities.Clients
 		public async Task<IMessage> SendMessageAsync(IChannel channel, string content)
 		{
 			return null;
+		}
+
+		internal IGuild? GetOrCreateGuild(ulong guildId)
+		{
+			if (this.Guilds.TryGetValue(guildId, out IGuild guild))
+			{
+				return guild;
+			}
+			else
+			{
+				bool exists = _discordGuilds.TryGetValue(guildId, out DiscordGuild discordGuild);
+				
+				if (!exists) return null;
+
+				var concreteGuild = new Guild(discordGuild);
+				return concreteGuild;
+			}
 		}
 	}
 }
