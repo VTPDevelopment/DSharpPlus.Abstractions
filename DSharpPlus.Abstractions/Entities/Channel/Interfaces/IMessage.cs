@@ -20,6 +20,11 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 		public IUser Author { get; internal set; }
 		
 		/// <summary>
+		/// The channel this message was sent in.
+		/// </summary>
+		public IChannel Channel { get; internal set; }
+		
+		/// <summary>
 		/// The time this message was edited.
 		/// </summary>
 		public DateTimeOffset? EditedTimestamp { get; internal set; }
