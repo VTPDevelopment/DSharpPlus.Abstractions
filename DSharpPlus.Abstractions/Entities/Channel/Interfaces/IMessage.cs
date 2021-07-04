@@ -55,8 +55,15 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 		/// </summary>
 		/// <param name="content">The content to reply with.</param>
 		/// <param name="mention">Whether or not to mention the original author.</param>
-		/// <returns></returns>
+		/// <returns>The sent message.</returns>
 		public Task<IMessage> ReplyAsync(string content, bool mention = false);
+		
+		/// <summary>
+		/// Replies to this message with the specified content.
+		/// </summary>
+		/// <param name="embed">The embed to reply with.</param>
+		/// <param name="mention">Whether or not to mention the original author.</param>
+		/// <returns>The sent message.</returns>
 		public Task<IMessage> ReplyAsync(Embed embed, bool mention = false);
 		public Task<IMessage> ReplyAsync(string content, Embed embed, bool mention = false);
 		public Task<IMessage> ReplyAsync(string content, Embed embed, MessageComponent[] components, bool mention = false);

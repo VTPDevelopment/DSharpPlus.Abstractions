@@ -1,4 +1,5 @@
 ﻿using System;
+using DSharpPlus.Abstractions.Entities.Clients;
 
 namespace DSharpPlus.Abstractions.Entities
 {
@@ -17,6 +18,8 @@ namespace DSharpPlus.Abstractions.Entities
 		/// </summary>
 		public DateTimeOffset CreationDate => DiscordEpoch.AddMilliseconds(Id >> 22);
 
+		internal IDiscordClient Client { get; set; }
 		private static DateTimeOffset DiscordEpoch = new DateTimeOffset(2015, 1, 1, 0, 0, 0, TimeSpan.Zero);
+		
 	}
 }
