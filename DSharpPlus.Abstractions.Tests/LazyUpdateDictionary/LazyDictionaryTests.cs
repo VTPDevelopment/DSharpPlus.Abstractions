@@ -15,7 +15,7 @@ namespace DSharpPlus.Abstractions.Tests
 		{
 			//Arrange
 			var underlyingDictionary = new Dictionary<ulong, DiscordGuild>() { [_guildId] = Activator.CreateInstance<DiscordGuild>()};
-			var dict = new LazyUpdateDictionary<ulong, IGuild, DiscordGuild>(i => new Guild(i), underlyingDictionary);
+			var dict = new LazyUpdateDictionary<ulong, IGuild, DiscordGuild>(underlyingDictionary, i => new Guild(i));
 			IGuild? guild = null;
 			
 			//Act

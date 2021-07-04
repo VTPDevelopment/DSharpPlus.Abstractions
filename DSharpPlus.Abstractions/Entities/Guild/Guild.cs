@@ -17,9 +17,9 @@ namespace DSharpPlus.Abstractions.Entities
 			_underlyingGuild = guild;
 		}
 
-		ulong ISnowflake.Id => _underlyingGuild.Id;
+		ulong ISnowflakeObject.Id => _underlyingGuild.Id;
 
-		IDiscordClient ISnowflake.Client { get; set; }
+		IDiscordClient ISnowflakeObject.Client { get; set; }
 
 		public IReadOnlyDictionary<ulong, IChannel> Channels => null;
 

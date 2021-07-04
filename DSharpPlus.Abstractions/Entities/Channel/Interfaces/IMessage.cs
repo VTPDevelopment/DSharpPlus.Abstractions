@@ -7,7 +7,7 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 	/// <summary>
 	/// Represents a message.
 	/// </summary>
-	public interface IMessage : ISnowflake
+	public interface IMessage : ISnowflakeObject
 	{
 		/// <summary>
 		/// The string content this message was sent with.

@@ -2,7 +2,7 @@
 
 namespace DSharpPlus.Abstractions.Entities.Interfaces
 {
-	public interface IGuild : ISnowflake
+	public interface IGuild : ISnowflakeObject
 	{
 		public IReadOnlyDictionary<ulong, IChannel> Channels { get; }
 		public IReadOnlyDictionary<ulong, IMember> Members { get; }

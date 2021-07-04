@@ -4,7 +4,7 @@ using DSharpPlus.Abstractions.Builders;
 
 namespace DSharpPlus.Abstractions.Entities.Interfaces
 {
-	public interface IChannel : ISnowflake
+	public interface IChannel : ISnowflakeObject
 	{
 		public ulong GuildId { get; internal set; }
 		
