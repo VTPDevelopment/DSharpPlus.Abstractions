@@ -70,13 +70,26 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 		/// <param name="mention">Whether or not to mention the original author.</param>
 		/// <returns>The sent message.</returns>
 		public Task<IMessage> ReplyAsync(Embed embed, bool mention = false);
-		public Task<IMessage> ReplyAsync(string content, Embed embed, bool mention = false);
-		public Task<IMessage> ReplyAsync(string content, Embed embed, MessageComponent[] components, bool mention = false);
 		
+		//TODO: Docs
+		public Task<IMessage> ReplyAsync(string content, Embed embed, bool mention = false);
+				
+		//TODO: Docs
+		public Task<IMessage> ReplyAsync(string content, Embed embed, MessageComponent[] components, bool mention = false);
+				
+		//TODO: Docs
 		public Task<IMessage> EditAsync(string content);
+				
+		//TODO: Docs
 		public Task<IMessage> EditAsync(Embed embed);
+				
+		//TODO: Docs
 		public Task<IMessage> EditAsync(string content, Embed embed);
+		
+		//TODO: Docs		
 		public Task<IMessage> EditAsync(string content, Embed[] embeds);
+				
+		//TODO: Docs
 		public Task<IMessage> EditAsync(MessageComponent[] components);
 	}
 }
