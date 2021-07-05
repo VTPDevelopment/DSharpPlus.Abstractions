@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 namespace DSharpPlus.Abstractions
 {
-	public sealed class LazyUpdateDictionary<TKey, TValue, TUnderlying> : IDictionary<TKey, TValue>
+	public sealed class LazyUpdateDictionary<TKey, TValue, TUnderlying> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>
 	{
 		private readonly IDictionary<TKey, TValue> _lazyCache = new Dictionary<TKey, TValue>();
-		private readonly IDictionary<TKey, TUnderlying> _underlyingCache;
+		private readonly IReadOnlyDictionary<TKey, TUnderlying> _underlyingCache;
 		private readonly Func<TUnderlying, TValue> _castFunc;
 
-		public LazyUpdateDictionary(IDictionary<TKey, TUnderlying> underlyingCache, Func<TUnderlying, TValue> castFunc)
+		public LazyUpdateDictionary(IReadOnlyDictionary<TKey, TUnderlying> underlyingCache, Func<TUnderlying, TValue> castFunc)
 		{
 			this._underlyingCache = underlyingCache;
 			this._castFunc = castFunc;
 		}
-
+		
 		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => _lazyCache.GetEnumerator();
 		IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _lazyCache).GetEnumerator();
 		public void Add(KeyValuePair<TKey, TValue> item) => _lazyCache.Add(item);
@@ -28,18 +28,18 @@ namespace DSharpPlus.Abstractions
 		public bool IsReadOnly => _lazyCache.IsReadOnly;
 
 		public void Add(TKey key, TValue value) => _lazyCache.Add(key, value);
-		public bool ContainsKey(TKey key) => _lazyCache.ContainsKey(key);
+		public bool ContainsKey(TKey key) => _lazyCache.ContainsKey(key) || _underlyingCache.ContainsKey(key);
 		public bool Remove(TKey key) => _lazyCache.Remove(key);
 		public bool TryGetValue(TKey key, out TValue value)
 		{
 			value = default;
-
+			
 			if (!_underlyingCache.TryGetValue(key, out _))
 			{
 				_lazyCache.Remove(key); // Just in case. //
 				return false;
 			}
-
+			
 			if (!_lazyCache.TryGetValue(key, out value))
 			{
 				value = GenerateAndCache(key);
@@ -57,6 +57,10 @@ namespace DSharpPlus.Abstractions
 			set => _lazyCache[key] = value;
 		}
 
+		IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
+
+		IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => Values;
+
 		public ICollection<TKey> Keys => _lazyCache.Keys;
 
 		public ICollection<TValue> Values => _lazyCache.Values;
@@ -64,8 +68,7 @@ namespace DSharpPlus.Abstractions
 
 		private TValue GenerateAndCache(TKey key)
 		{
-			if (!_underlyingCache.TryGetValue(key, out TUnderlying cachedValue))
-				throw new KeyNotFoundException();
+			_underlyingCache.TryGetValue(key, out TUnderlying cachedValue); // We're gonna assume this is in cache. Oh well. //
 
 			TValue cached = _castFunc(cachedValue);
 

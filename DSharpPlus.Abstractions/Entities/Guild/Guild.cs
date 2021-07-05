@@ -8,27 +8,19 @@ using DSharpPlus.Abstractions.Entities.Interfaces;
 
 namespace DSharpPlus.Abstractions.Entities
 {
-	public sealed class Guild : IGuild
+	public sealed class Guild : RestEntity<DiscordGuild>, IGuild
 	{
-		private readonly DiscordGuild _underlyingGuild;
 
-		public Guild(DiscordGuild guild)
-		{
-			_underlyingGuild = guild;
-		}
+		public Guild(DiscordGuild guild) => this.UnderlyingEntity = guild;
 
-		ulong ISnowflakeObject.Id => _underlyingGuild.Id;
-
-		IDiscordClient ISnowflakeObject.Client { get; set; }
-
+		ulong ISnowflakeObject.Id => this.UnderlyingEntity.Id;
+		
+		//TODO: IMPLEMENT
 		public IReadOnlyDictionary<ulong, IChannel> Channels => null;
 
+		//TODO: IMPLMENT
 		public IReadOnlyDictionary<ulong, IMember> Members => null;
 
-		IMember IGuild.CurrentMember
-		{
-			get => null;
-			set { }
-		}
+		public IMember CurrentMember => this.Members[this.UnderlyingEntity.CurrentMember.Id]; // I'll fix this later dw //
 	}
 }

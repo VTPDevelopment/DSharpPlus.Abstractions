@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
 using DSharpPlus.Abstractions.Entities;
+using DSharpPlus.Entities;
 
 namespace DSharpPlus.Abstractions.Builders
 {
-	public class MessageBuilder
+	public record MessageBuilder
 	{
 		public ulong? Reply { get; private set; }
 		public bool MentionInReply { get; private set; }
@@ -13,9 +15,9 @@ namespace DSharpPlus.Abstractions.Builders
 		public IReadOnlyList<Embed> Embeds => _embeds;
 		private readonly List<Embed> _embeds = new(10);
 		
-		public IReadOnlyList<MessageComponent> Components => _components;
-		private readonly List<MessageComponent> _components = new(5);
-
+		public IReadOnlyList<ActionRow> Components => _components;
+		private readonly List<ActionRow> _components = new(5);
+		
 		public MessageBuilder WithContent(string content)
 		{
 			ValidateContent(content);
@@ -53,6 +55,25 @@ namespace DSharpPlus.Abstractions.Builders
 			
 			if (content.Length > 2000)
 				throw new ArgumentOutOfRangeException(nameof(content), "Bots can only send messages up to 2000 characters long.");
+		}
+		public DiscordMessageBuilder ToDiscord()
+		{
+			var builder = new DiscordMessageBuilder();
+			
+			if (!string.IsNullOrWhiteSpace(this.Content))
+				builder.WithContent(this.Content);
+
+			if (this.Embeds.Any())
+				builder.AddEmbeds(this.Embeds.Select(e => e.ToDiscord()));
+
+			if (this.Components.Any())
+				foreach (var comp in this.Components)
+					builder.AddComponents(comp.Components?.Select(comp => comp.ToDiscord()));
+			
+			//if (this.Files.Any())
+				//builder.WithFiles(this.Files);
+				
+			return builder;
 		}
 	}
 }

@@ -12,47 +12,47 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 		/// <summary>
 		/// The string content this message was sent with.
 		/// </summary>
-		public string? Content { get; internal set; }
+		public string? Content { get; }
 		
 		/// <summary>
 		/// The user that sent this message.
 		/// </summary>
-		public IUser Author { get; internal set; }
+		public IUser Author { get; }
 		
 		/// <summary>
 		/// The channel this message was sent in.
 		/// </summary>
-		public IChannel Channel { get; internal set; }
+		public IChannel Channel { get; }
 		
 		/// <summary>
 		/// The time this message was edited.
 		/// </summary>
-		public DateTimeOffset? EditedTimestamp { get; internal set; }
+		public DateTimeOffset? EditedTimestamp { get; }
 		
 		/// <summary>
 		/// The embeds sent with this message.
 		/// </summary>
-		public IReadOnlyList<Embed> Embeds { get; internal set; }
+		public IReadOnlyList<Embed> Embeds { get; }
 		
 		/// <summary>
 		/// The components on this message.
 		/// </summary>
-		public IReadOnlyList<MessageComponent> Components { get; internal set; }
+		public IReadOnlyList<ActionRow> Components { get; }
 		
 		/// <summary>
 		/// The users mentioned in this message.
 		/// </summary>
-		public IReadOnlyList<IUser> MentionedUsers { get; internal set; }
+		public IReadOnlyList<IUser> MentionedUsers { get; }
 		
 		/// <summary>
 		/// The roles mentioned in this message.
 		/// </summary>
-		public IReadOnlyList<IGuildRole> MentionedRoles { get; internal set; }
+		public IReadOnlyList<IGuildRole> MentionedRoles { get; }
 		
 		/// <summary>
 		/// The channels mentioned in this message.
 		/// </summary>
-		public IReadOnlyList<IChannel> MentionedChannels { get; internal set; }
+		public IReadOnlyList<IChannel> MentionedChannels { get; }
 		
 
 		/// <summary>

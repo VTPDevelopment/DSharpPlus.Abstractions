@@ -7,6 +7,6 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 		public IReadOnlyDictionary<ulong, IChannel> Channels { get; }
 		public IReadOnlyDictionary<ulong, IMember> Members { get; }
 		
-		public IMember CurrentMember { get; internal set; }
+		public IMember CurrentMember { get; }
 	}
 }

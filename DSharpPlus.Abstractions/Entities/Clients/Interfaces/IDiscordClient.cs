@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using System.Threading.Tasks;
 using DSharpPlus.Abstractions.Entities;
 using DSharpPlus.Abstractions.Entities.Interfaces;
+using DSharpPlus.Entities;
 
 namespace DSharpPlus.Abstractions.Entities.Clients
 {
@@ -44,5 +45,7 @@ namespace DSharpPlus.Abstractions.Entities.Clients
 		public Task<IUser> GetUserAsync(ulong userId);
 
 		public Task<IMessage> SendMessageAsync(IChannel channel, string content);
+
+		internal Task<IChannel> CreateDmAsync(IUser user);
 	}
 }

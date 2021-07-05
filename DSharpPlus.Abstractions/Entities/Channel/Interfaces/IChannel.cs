@@ -6,11 +6,11 @@ namespace DSharpPlus.Abstractions.Entities.Interfaces
 {
 	public interface IChannel : ISnowflakeObject
 	{
-		public ulong GuildId { get; internal set; }
+		public ulong GuildId { get; }
 		
-		public ulong? ParentId { get; internal set; }
+		public ulong? ParentId { get; }
 		
-		public IGuild? Guild { get; internal set; }
+		public IGuild? Guild { get; }
 
 		public bool IsDm => this.GuildId is 0;
 		

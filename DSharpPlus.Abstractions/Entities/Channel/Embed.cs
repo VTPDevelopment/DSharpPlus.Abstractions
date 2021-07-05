@@ -1,4 +1,5 @@
 ﻿using System;
+using DSharpPlus.Entities;
 
 namespace DSharpPlus.Abstractions.Entities
 {
@@ -36,6 +37,10 @@ namespace DSharpPlus.Abstractions.Entities
 		/// The timestamp of this embed.
 		/// </summary>
 		public DateTime Timestamp { get; }
+		public DiscordEmbed ToDiscord()
+		{
+			return null;
+		}
 	}
 	
 	/// <summary>
