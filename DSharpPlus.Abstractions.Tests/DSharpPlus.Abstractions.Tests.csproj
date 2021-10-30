@@ -17,4 +17,8 @@
       <ProjectReference Include="..\DSharpPlus.Abstractions\DSharpPlus.Abstractions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="LazyUpdateDictionary" />
+    </ItemGroup>
+
 </Project>
