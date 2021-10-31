@@ -28,4 +28,4 @@ Anything that has access to Discord's API* will be wrapped in an interface, if p
 
 These abstractions actually hold references to D#+ entities under the hood, and will (in their default implementation) invoke D#+ methods.
 
-
+Furthermore, I'm a single person, so feel free to open a PR if you feel like contributing! It's greatly appreciated 😄
