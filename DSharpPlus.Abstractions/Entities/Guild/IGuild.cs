@@ -70,7 +70,28 @@ namespace DSharpPlus.Abstractions.Entities
 		 * TODO: GetWebhooksAsync
 		 * TODO: GetWidgetImage
 		 *
-		 * 
+		 * TODO: IRole, CreateRoleAsync
+		 * TODO: GetRole
+		 *
+		 * TODO: IGuildEmoji, GetEmojisAsync
+		 * TODO: CreateEmojiAsync
+		 * TODO: ModifyEmojiAsync
+		 * TODO: DeleteEmojiAsync
+		 *
+		 * TODO: ISticker, GetStickersAsync
+		 * TODO: GetStickerAsync
+		 * TODO: CreateStickerAsync
+		 * TODO: ModifyStickerAsync
+		 * TODO: DeleteStickerAsync
+		 *
+		 * TODO: GetApplicationCommandsAsync
+		 * TODO: BulkOverwriteApplicationCommandsAsync
+		 * TODO: CreateApplicationCommandAsync
+		 * TODO: EditApplicationCommandAsync,
+		 *
+		 * TODO: GetApplicationCommandsPermissionsAsync
+		 * TODO: EditApplicationCommandPermissionsAsync
+		 * TODO: BatchEditApplicationCommandPermissionsAsync
 		 */
 
 		public IReadOnlyList<string> Featrures { get; }
@@ -119,6 +140,10 @@ namespace DSharpPlus.Abstractions.Entities
 		public Task<IReadOnlyList<IGuildMember>> GetAllMembersAsync();
 
 		public Task<IReadOnlyList<IChannel>> GetChannelsAsync();
+
+		public IChannel GetChannel(ulong id);
+
+		public IChannel GetDefaultChannel();
 		
 		
 	}
