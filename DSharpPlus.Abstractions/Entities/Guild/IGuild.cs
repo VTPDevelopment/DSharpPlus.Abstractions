@@ -122,8 +122,8 @@ namespace DSharpPlus.Abstractions.Entities
 		public Task LeaveAsync();
 
 		public Task<IReadOnlyList<DiscordBan>> GetBansAsync();
-		
-		public Task<IChannel> CreateChannelAsync(string name, ChannelType type, IChannel? parent = null, Optional<string> topic = default, int? bitrate = null, int? userLimit = null, IEnumerable<DiscordOverwriteBuilder>? overwrites = null, bool? nsfw = null, Optional<int?> perUserRateLimit = default, VideoQualityMode? qualityMode = null, string reason = null )
+
+		public Task<IChannel> CreateChannelAsync(string name, ChannelType type, IChannel? parent = null, Optional<string> topic = default, int? bitrate = null, int? userLimit = null, IEnumerable<DiscordOverwriteBuilder>? overwrites = null, bool? nsfw = null, Optional<int?> perUserRateLimit = default, VideoQualityMode? qualityMode = null, string? reason = null);
 		
 		public Task<IReadOnlyList<DiscordIntegration>> GetIntegrationsAsync();
 
@@ -144,7 +144,5 @@ namespace DSharpPlus.Abstractions.Entities
 		public IChannel GetChannel(ulong id);
 
 		public IChannel GetDefaultChannel();
-		
-		
 	}
 }
