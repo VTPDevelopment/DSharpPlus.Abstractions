@@ -94,7 +94,7 @@ namespace DSharpPlus.Abstractions.Entities
 		 * TODO: BatchEditApplicationCommandPermissionsAsync
 		 */
 
-		public IReadOnlyList<string> Featrures { get; }
+		public IReadOnlyList<string> Features { get; }
 		
 		public DateTimeOffset JoinedAt { get; }
 		
