@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DSharpPlus.Entities;
 
@@ -29,6 +30,7 @@ namespace DSharpPlus.Abstractions.Entities
 		public bool IsEdited => _message.IsEdited;
 		public bool IsTTS => _message.IsTTS;
         public bool MentionEveryone => _message.MentionEveryone;
+        
         public IReadOnlyList<IUser> MentionedUsers 
         {
             get
@@ -51,15 +53,25 @@ namespace DSharpPlus.Abstractions.Entities
         private IReadOnlyList<IUser> _mentionedUsers;
 
 		public IReadOnlyList<DiscordAttachment> Attachments => _message.Attachments;
+		
 		public IReadOnlyList<DiscordEmbed> Embeds => _message.Embeds;
+		
 		public bool Pinned => _message.Pinned;
+		
 		public ulong? WebhookId => _message.WebhookId;
+		
 		public MessageType? Type => _message.MessageType;
+		
 		public DiscordMessageActivity Activity => _message.Activity;
+		
 		public DiscordMessageApplication Application => _message.Application;
+		
 		public MessageFlags? Flags => _message.Flags;
+		
 		public bool? WebhookMessage => _message.WebhookMessage;
+		
 		public Uri JumpLink => _message.JumpLink;
+		
 		public IMessage ReferencedMessage 
         {
             get
@@ -67,9 +79,16 @@ namespace DSharpPlus.Abstractions.Entities
                 if (_message.ReferencedMessage is null)
                     return null!;
                 
-                return new Message(_message.ReferencedMessage, _client); //TODO: Message cache
+                if (_client.MessageBuffer.FirstOrDefault(m => m.Id == _message.ReferencedMessage.Id) is IMessage msg)
+                    return msg;
+                
+                msg = new Message(_message.ReferencedMessage, _client);
+                
+                _client.MessageBuffer.Add(msg);
+                return msg;
             }
         }
+		
 		public ulong? ApplicationId => _message.ApplicationId;
 
 		public async Task<IMessage> ModifyAsync(Optional<string> content)
@@ -77,59 +96,88 @@ namespace DSharpPlus.Abstractions.Entities
             var msg = await _message.ModifyAsync(content).ConfigureAwait(false);
             return new Message(msg, _client); //TODO: Message cache
 		}
+		
 		public async Task<IMessage> ModifyAsync(Optional<DiscordEmbed> embed)
 		{
             var msg = await _message.ModifyAsync(embed).ConfigureAwait(false);
             return new Message(msg, _client); //TODO: Message cache
 		}
+		
 		public async Task<IMessage> ModifyAsync(Optional<string> content, Optional<DiscordEmbed> embed)
 		{
             var msg = await _message.ModifyAsync(content, embed).ConfigureAwait(false);
             return new Message(msg, _client); //TODO: Message cache
 		}
+		
 		public async Task<IMessage> ModifyAsync(Optional<string> content, Optional<IEnumerable<DiscordEmbed>> embeds)
 		{
 			var msg = await _message.ModifyAsync(content, embeds).ConfigureAwait(false);
             return new Message(msg, _client); //TODO: Message cache
 		}
+		
 		public async Task<IMessage> ModifyAsync(DiscordMessageBuilder builder, bool suppressEmbeds = false, IEnumerable<DiscordAttachment>? attachments = default)
 		{
             var msg = await _message.ModifyAsync(builder, suppressEmbeds, attachments).ConfigureAwait(false);
             return new Message(msg, _client); //TODO: Message cache
 		}
+		
 		public async Task<IMessage> ModifyAsync(Action<DiscordMessageBuilder> action, bool suppressEmbeds = false, IEnumerable<DiscordAttachment>? attachments = default)
 		{
             var msg = await _message.ModifyAsync(action, suppressEmbeds, attachments).ConfigureAwait(false);
             return new Message(msg, _client); //TODO: Message cache
 		}
-		public Task ModifyEmbedSuppressionAsync(bool hideEmbeds) => _message.ModifyEmbedSuppressionAsync(hideEmbeds).ConfigureAwait(false);
+		
+		public Task ModifyEmbedSuppressionAsync(bool hideEmbeds) => _message.ModifyEmbedSuppressionAsync(hideEmbeds);
+		
 		public  Task DeleteAsync(string? reason = null) => _message.DeleteAsync(reason);
+		
 		public Task PinAsync() => _message.PinAsync();
+		
 		public Task UnpinAsync() => _message.UnpinAsync();
+		
 		public async Task<IMessage> RespondAsync(string content)
 		{
             var msg = await _message.RespondAsync(content).ConfigureAwait(false);
-            return new Message(msg, _client); //TODO: Message cache
+            
+            var ret = new Message(msg, _client);
+            _client.MessageBuffer.Add(ret);
+            return ret;
 		}
+		
 		public async Task<IMessage> RespondAsync(DiscordEmbed embed)
 		{
             var msg = await _message.RespondAsync(embed).ConfigureAwait(false);
-            return new Message(msg, _client); //TODO: Message cache
+
+            var ret = new Message(msg, _client);
+            _client.MessageBuffer.Add(ret);
+            return ret;
 		}
+		
 		public async Task<IMessage> RespondAsync(string content, DiscordEmbed embed)
 		{
             var msg = await _message.RespondAsync(content, embed).ConfigureAwait(false);
-            return new Message(msg, _client); //TODO: Message cache
+			
+            var ret = new Message(msg, _client);
+			_client.MessageBuffer.Add(ret);
+			return ret;
 		}
+		
 		public async Task<IMessage> RespondAsync(DiscordMessageBuilder builder)
 		{
             var msg = await _message.RespondAsync(builder).ConfigureAwait(false);
-            return new Message(msg, _client); //TODO: Message cache
+            
+            var ret = new Message(msg, _client);
+            _client.MessageBuffer.Add(ret);
+            return ret;
 		}
+		
 		public async Task<IMessage> RespondAsync(Action<DiscordMessageBuilder> action)
 		{
             var msg = await _message.RespondAsync(action).ConfigureAwait(false);
-            return new Message(msg, _client); //TODO: Message cache
+            
+            var ret = new Message(msg, _client);
+            _client.MessageBuffer.Add(ret);
+            return ret;
 		}
 	}
 }

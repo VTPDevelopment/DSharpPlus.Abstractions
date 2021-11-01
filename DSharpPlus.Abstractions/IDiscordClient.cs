@@ -8,14 +8,15 @@ namespace DSharpPlus.Abstractions
 {
 	public interface IDiscordClient
 	{
+		internal IReadOnlyDictionary<ulong, IUser> Users { get; }
 
-		internal protected IReadOnlyDictionary<ulong, IUser> Users { get; }
+		internal RingBuffer<IMessage> MessageBuffer { get; }
 
 		public IUser CurrentUser { get; }
 		
 		public IReadOnlyDictionary<ulong, IGuild> Guilds { get; }
-
-
+		
+		
 		public Task ConnectAsync(DiscordActivity activity = null, UserStatus? status = null, DateTimeOffset? idlesince = null);
 		public Task DisconnectAsync();
 
