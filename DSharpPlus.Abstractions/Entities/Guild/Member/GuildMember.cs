@@ -7,7 +7,7 @@ namespace DSharpPlus.Abstractions.Entities
 {
 	public sealed class GuildMember : IGuildMember
 	{
-		private readonly DiscordMember _member;
+		internal readonly DiscordMember _member;
 		private readonly IDiscordClient _client;
 		
 		public GuildMember(DiscordMember member, IDiscordClient client)

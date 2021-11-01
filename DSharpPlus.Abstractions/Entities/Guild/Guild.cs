@@ -9,7 +9,7 @@ namespace DSharpPlus.Abstractions.Entities
 {
 	public class Guild : IGuild
 	{
-		private readonly DiscordGuild _guild;
+		internal readonly DiscordGuild _guild;
 		private readonly IDiscordClient _client;
 		
 		private readonly LazyUpdateDictionary<ulong, IGuildMember, DiscordMember> _members;
