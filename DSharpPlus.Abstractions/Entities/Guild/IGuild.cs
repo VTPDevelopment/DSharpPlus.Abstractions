@@ -143,6 +143,6 @@ namespace DSharpPlus.Abstractions.Entities
 
 		public IChannel? GetChannel(ulong id);
 
-		public IChannel GetDefaultChannel();
+		public IChannel? GetDefaultChannel();
 	}
 }
