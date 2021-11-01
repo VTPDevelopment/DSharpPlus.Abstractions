@@ -52,6 +52,11 @@ namespace DSharpPlus.Abstractions
 		IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 		/// <summary>
+		/// Clears the Dictionary's cache, causing objects to be remade on next access.
+		/// </summary>
+		public void Clear() => _backingDictionary.Clear();
+		
+		/// <summary>
 		/// <para>Attempts to get the value for the given key.</para>
 		/// <para>If the key does not exist in the underlying dictionary, this will return false.</para>
 		/// <para>If the key exists in the underlying dictionary, but not in the backing dictionary, a new value will be generated and added to the backing dictionary.</para>
