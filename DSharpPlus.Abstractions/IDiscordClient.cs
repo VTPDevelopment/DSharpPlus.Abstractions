@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DSharpPlus.Abstractions.Entities;
 using DSharpPlus.Entities;
@@ -9,6 +10,8 @@ namespace DSharpPlus.Abstractions
 	{
 		public IUser CurrentUser { get; }
 		
+		public IReadOnlyDictionary<ulong, IGuild> Guilds { get; }
+
 		public Task ConnectAsync(DiscordActivity activity = null, UserStatus? status = null, DateTimeOffset? idlesince = null);
 		public Task DisconnectAsync();
 
