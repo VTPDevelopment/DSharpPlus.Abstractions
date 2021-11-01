@@ -8,9 +8,13 @@ namespace DSharpPlus.Abstractions
 {
 	public interface IDiscordClient
 	{
+
+		internal protected IReadOnlyDictionary<ulong, IUser> Users { get; }
+
 		public IUser CurrentUser { get; }
 		
 		public IReadOnlyDictionary<ulong, IGuild> Guilds { get; }
+
 
 		public Task ConnectAsync(DiscordActivity activity = null, UserStatus? status = null, DateTimeOffset? idlesince = null);
 		public Task DisconnectAsync();
@@ -38,7 +42,6 @@ namespace DSharpPlus.Abstractions
 		//public Task<IWebhook> GetWebhookAsync(ulong id);
 		
 		//public Task<IWebhook> GetWebhookAsync(ulong id, string token);
-		
 		
 		
 	}
