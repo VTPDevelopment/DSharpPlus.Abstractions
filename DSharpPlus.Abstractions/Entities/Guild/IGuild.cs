@@ -141,7 +141,7 @@ namespace DSharpPlus.Abstractions.Entities
 
 		public Task<IReadOnlyList<IChannel>> GetChannelsAsync();
 
-		public IChannel GetChannel(ulong id);
+		public IChannel? GetChannel(ulong id);
 
 		public IChannel GetDefaultChannel();
 	}
