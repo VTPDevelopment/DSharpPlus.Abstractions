@@ -41,7 +41,7 @@ namespace DSharpPlus.Abstractions.Entities
 
 		public bool Pinned { get; }
 
-		public bool WebhookId { get; }
+		public ulong? WebhookId { get; }
 
 		public MessageType? Type { get; }
 
@@ -59,7 +59,7 @@ namespace DSharpPlus.Abstractions.Entities
 
 		// TODO: ISticker, Stickers
 
-		public IMessage ReferenceMessage { get; }
+		public IMessage ReferencedMessage { get; }
 
 		//TODO: IMessageInteraction, Interaction
 
