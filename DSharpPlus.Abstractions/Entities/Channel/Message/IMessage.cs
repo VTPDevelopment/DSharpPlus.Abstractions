@@ -14,6 +14,8 @@ namespace DSharpPlus.Abstractions.Entities
 		public IReadOnlyCollection<DiscordActionRowComponent> Components { get; }
 
 		public IUser Author { get; }
+		
+		public IGuild? Guild { get; }
 
 		public string Content { get; }
 
